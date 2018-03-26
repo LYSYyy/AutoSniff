@@ -8,11 +8,12 @@
   ░   ▒    ░░░ ░ ░   ░      ░ ░ ░ ▒  ░  ░  ░     ░   ░ ░  ▒ ░ ░ ░    ░ ░    
       ░  ░   ░                  ░ ░        ░           ░  ░                 
                                                    AutoSniff v1.0 by LYSYyy
-                                                   
+
+
 #AutoSniff
 AutoSniff (AS) is a program that calls the most popular tools for sniffing on network traffic. AS combines and automates tools such as: Ettercap, WireShark, SSLstrip, DNS2Proxy and URLsnarf. It's all automatically and quickly! Available in Linux!
 
-## MFC FUNCTION:
+## AutoSniff FUNCTION:
 
 - Four sniffing levels
 
