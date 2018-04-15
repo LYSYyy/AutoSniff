@@ -105,6 +105,7 @@ function main
 		autosniff
 		
 	else
+		clear
 		main
 	fi
 }
