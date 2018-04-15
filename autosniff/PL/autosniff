@@ -51,8 +51,6 @@ function logo
 			echo -e "\e[1mSesja została zapisana w '\e[31m/root/$SESSION/'\e[0m"
 			echo
 			read
-		elif [ $ODP = "q" ]; then
-			exit
 		else
 			session
 		fi
@@ -447,6 +445,12 @@ function start
 	# Bez zapisu sesji
 	elif [ $save = "N" ]; then
 		mainnosave
+		
+	elif [ $ODP = "Q" ]; then
+		exit
+		
+	elif [ $ODP = "q" ]; then
+		exit
 	
 	else
 		start
