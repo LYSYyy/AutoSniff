@@ -1,7 +1,7 @@
 #!/bin/bash
-# AutoSniff Script v1.0 by LYSY
+# AutoSniff Script v1.1by LYSY
 
-version="1.0"
+version="1.1
 
 # LOGO
 function logo
@@ -51,6 +51,10 @@ function logo
 			echo -e "\e[1mSesja została zapisana w '\e[31m/root/$SESSION/'\e[0m"
 			echo
 			read
+		elif [ $ODP = "q" ]; then
+			exit
+		else
+			session
 		fi
 		
 		clear
