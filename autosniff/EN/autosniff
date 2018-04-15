@@ -51,6 +51,10 @@ function logo
 			echo -e "\e[1mSession has been saved in '\e[31m/root/$SESSION/'\e[0m"
 			echo
 			read
+		elif [ $ODP = "q" ]; then
+			exit
+		else
+			session
 		fi
 		
 		clear
