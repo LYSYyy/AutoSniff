@@ -447,6 +447,12 @@ function start
 	# No saving session
 	elif [ $save = "N" ]; then
 		mainnosave
+		
+	elif [ $ODP = "Q" ]; then
+		exit
+		
+	elif [ $ODP = "q" ]; then
+		exit
 	
 	else
 		start
