@@ -446,10 +446,10 @@ function start
 	elif [ $save = "N" ]; then
 		mainnosave
 		
-	elif [ $ODP = "Q" ]; then
+	elif [ $save = "Q" ]; then
 		exit
 		
-	elif [ $ODP = "q" ]; then
+	elif [ $save = "q" ]; then
 		exit
 	
 	else
